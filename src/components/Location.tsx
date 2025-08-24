@@ -71,10 +71,16 @@ const Location = () => {
         setTimeout(() => clearTimeout(timeout), 1500);
     };
 
-    const openInKakaoMap = () => {  
-        const kakaoMapUrl =
+    const openInKakaoMap = () => {
+        const schemeUrl = "kakaomap://place?id=24692652";
+        const webUrl =
             "https://map.kakao.com/?map_type=TYPE_MAP&itemId=24692652&urlLevel=3&urlX=508602&urlY=1103020";
-        window.open(kakaoMapUrl, "_blank");
+
+        const timeout = setTimeout(() => {
+            window.open(webUrl, "_blank");
+        }, 800);
+        window.location.href = schemeUrl;
+        setTimeout(() => clearTimeout(timeout), 1500);
     };
 
     return (
