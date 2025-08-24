@@ -3,19 +3,31 @@
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 
+type NaverMapsNamespace = {
+    LatLng: new (lat: number, lng: number) => unknown;
+    Map: new (
+        element: HTMLElement,
+        options: Record<string, unknown>,
+    ) => unknown;
+    Marker: new (options: Record<string, unknown>) => unknown;
+};
+
 declare global {
     interface Window {
-        naver: any;
+        naver?: {
+            maps?: NaverMapsNamespace;
+        };
     }
 }
 
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID;
 
 const Location = () => {
-    // Yangjae Citizen's Forest
-    const placeName = "양재시민의숲";
+    // Yangjae Citizen's Forest Outdoor Wedding Venue
+    const placeName = "양재시민의숲 야외예식장";
     const latitude = 37.4703;
     const longitude = 127.0389;
+    const naverPlaceId = "31875178";
 
     const mapRef = useRef<HTMLDivElement | null>(null);
     const [scriptReady, setScriptReady] = useState(false);
@@ -23,10 +35,13 @@ const Location = () => {
     useEffect(() => {
         if (!scriptReady) return;
         if (!mapRef.current) return;
-        if (!window.naver || !window.naver.maps) return;
+        const maps = window.naver?.maps;
+        if (!maps) return;
 
-        const { maps } = window.naver;
-        const center = new maps.LatLng(latitude, longitude);
+        const center = new maps.LatLng(latitude, longitude) as unknown as {
+            y: number;
+            x: number;
+        };
         const map = new maps.Map(mapRef.current, {
             center,
             zoom: 16,
@@ -44,12 +59,8 @@ const Location = () => {
     }, [scriptReady]);
 
     const openInNaverMap = () => {
-        const schemeUrl = `nmap://place?lat=${latitude}&lng=${longitude}&name=${encodeURIComponent(
-            placeName,
-        )}`;
-        const webUrl = `https://map.naver.com/p/search/${encodeURIComponent(
-            placeName,
-        )}/place`; // fallback
+        const schemeUrl = `nmap://place?id=${naverPlaceId}`;
+        const webUrl = `https://map.naver.com/p/entry/place/${naverPlaceId}`;
 
         // Try app scheme first; fallback to web
         const timeout = setTimeout(() => {
@@ -60,10 +71,9 @@ const Location = () => {
         setTimeout(() => clearTimeout(timeout), 1500);
     };
 
-    const openInKakaoMap = () => {
-        const kakaoMapUrl = `https://map.kakao.com/link/map/${encodeURIComponent(
-            placeName,
-        )},${latitude},${longitude}`;
+    const openInKakaoMap = () => {  
+        const kakaoMapUrl =
+            "https://map.kakao.com/?map_type=TYPE_MAP&itemId=24692652&urlLevel=3&urlX=508602&urlY=1103020";
         window.open(kakaoMapUrl, "_blank");
     };
 
