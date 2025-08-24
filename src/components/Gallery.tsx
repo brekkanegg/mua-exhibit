@@ -35,13 +35,13 @@ const Gallery = () => {
     ];
 
     return (
-        <div className="space-y-6">
+        <div className="">
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
                 Gallery
             </h2>
 
             {/* Main Image Display */}
-            <div className="relative w-full h-96 bg-gray-200 rounded-lg overflow-hidden">
+            <div className="relative w-full h-96 bg-gray-200 overflow-hidden rounded-xl">
                 <Image
                     src={images[selectedImage].src}
                     alt={images[selectedImage].alt}
@@ -61,7 +61,7 @@ const Gallery = () => {
                     <button
                         key={index}
                         onClick={() => setSelectedImage(index)}
-                        className={`relative w-20 h-16 rounded-md overflow-hidden transition-all ${
+                        className={`relative w-20 h-16 overflow-hidden transition-all rounded-md ${
                             selectedImage === index
                                 ? "ring-2 ring-blue-500 transform scale-105"
                                 : "opacity-70 hover:opacity-100"
@@ -71,7 +71,7 @@ const Gallery = () => {
                             src={image.src}
                             alt={`Thumbnail ${index + 1}`}
                             fill
-                            className="object-cover"
+                            className="object-cover rounded-md"
                             onError={() => {
                                 console.log(`Thumbnail ${index + 1} not found`);
                             }}

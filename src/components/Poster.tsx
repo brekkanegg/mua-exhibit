@@ -9,12 +9,13 @@ type PosterProps = {
 
 const Poster = ({ src = "/poster.png", alt = "Poster image" }: PosterProps) => {
     return (
-        <div className="relative w-full h-[70vh] rounded-lg overflow-hidden">
+        <div className="relative w-screen h-svh overflow-hidden">
             <Image
                 src={src}
                 alt={alt}
                 fill
-                className="object-contain"
+                className="object-cover"
+                sizes="100vw"
                 priority
             />
         </div>
