@@ -35,7 +35,7 @@ const Gallery = () => {
     ];
 
     return (
-        <div className="">
+        <div className="mt-4">
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
                 Gallery
             </h2>

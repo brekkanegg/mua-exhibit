@@ -1,54 +1,120 @@
 "use client";
 
-import Script from "next/script";
-import { useEffect, useRef, useState } from "react";
-
-type NaverMapsNamespace = {
-    LatLng: new (lat: number, lng: number) => unknown;
-    Map: new (
-        element: HTMLElement,
-        options: Record<string, unknown>,
-    ) => unknown;
-    Marker: new (options: Record<string, unknown>) => unknown;
-};
+import { useEffect, useRef } from "react";
 
 declare global {
     interface Window {
         naver?: {
-            maps?: NaverMapsNamespace;
+            maps?: {
+                LatLng: new (lat: number, lng: number) => unknown;
+                Map: new (
+                    element: HTMLElement,
+                    options: Record<string, unknown>,
+                ) => unknown;
+                Marker: new (options: Record<string, unknown>) => unknown;
+                InfoWindow?: new (options: Record<string, unknown>) => {
+                    open: (map: unknown, marker: unknown) => void;
+                    close: () => void;
+                    getMap: () => unknown;
+                };
+                Event?: {
+                    addListener: (
+                        target: unknown,
+                        event: string,
+                        handler: () => void,
+                    ) => void;
+                };
+                Animation?: {
+                    DROP?: unknown;
+                };
+            };
         };
     }
 }
 
-const NAVER_CLIENT_ID = "vqqiozf073";
+const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID;
 
 const Location = () => {
     // Yangjae Citizen's Forest Outdoor Wedding Venue
     const placeName = "양재시민의숲 야외예식장";
-    const latitude = 37.4703;
-    const longitude = 127.0389;
+    const latitude = 37.4705198; // Google Maps 좌표
+    const longitude = 127.0353278;
     const naverPlaceId = "31875178";
 
     const mapRef = useRef<HTMLDivElement | null>(null);
-    const [scriptReady, setScriptReady] = useState(false);
 
     useEffect(() => {
-        if (!scriptReady || !mapRef.current || !window.naver?.maps) return;
+        if (!NAVER_CLIENT_ID) {
+            console.error("Naver Maps Client ID is not set");
+            return;
+        }
 
-        const mapOptions = {
-            center: new window.naver.maps.LatLng(latitude, longitude),
-            zoom: 16,
+        // Create and load script
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${NAVER_CLIENT_ID}`;
+        script.async = true;
+
+        script.onload = () => {
+            // Initialize map after script loads
+            if (mapRef.current && window.naver && window.naver.maps) {
+                const mapOptions = {
+                    center: new window.naver.maps.LatLng(latitude, longitude),
+                    zoom: 17, // 더 가까운 줌 레벨로 조정
+                    mapTypeControl: true,
+                    scaleControl: true,
+                    zoomControl: true,
+                };
+
+                const map = new window.naver.maps.Map(
+                    mapRef.current,
+                    mapOptions,
+                );
+
+                // Add marker with more options
+                const markerOptions: Record<string, unknown> = {
+                    position: new window.naver.maps.LatLng(latitude, longitude),
+                    map: map,
+                    title: placeName,
+                };
+
+                // Add animation if available
+                if (window.naver.maps.Animation?.DROP) {
+                    markerOptions.animation = window.naver.maps.Animation.DROP;
+                }
+
+                const marker = new window.naver.maps.Marker(markerOptions);
+
+                // Add info window if available
+                if (window.naver.maps.InfoWindow && window.naver.maps.Event) {
+                    const infoWindow = new window.naver.maps.InfoWindow({
+                        content: `<div style="padding: 10px; min-width: 150px;">
+                            <h4 style="margin: 0 0 5px 0;">${placeName}</h4>
+                            <p style="margin: 0; font-size: 12px;">서울 서초구 매헌로 99</p>
+                        </div>`,
+                    });
+
+                    // Show info window on marker click
+                    window.naver.maps.Event.addListener(marker, "click", () => {
+                        if (infoWindow.getMap()) {
+                            infoWindow.close();
+                        } else {
+                            infoWindow.open(map, marker);
+                        }
+                    });
+                }
+            }
         };
 
-        const map = new window.naver.maps.Map(mapRef.current, mapOptions);
+        document.head.appendChild(script);
 
-        // Add marker for the venue
-        new window.naver.maps.Marker({
-            position: new window.naver.maps.LatLng(latitude, longitude),
-            map: map,
-            title: placeName,
-        });
-    }, [scriptReady]);
+        // Cleanup
+        return () => {
+            if (document.head.contains(script)) {
+                document.head.removeChild(script);
+            }
+        };
+    }, []);
 
     const openInNaverMap = () => {
         const schemeUrl = `nmap://place?id=${naverPlaceId}`;
@@ -76,19 +142,21 @@ const Location = () => {
     };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-12 mt-12">
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
                 Location
             </h2>
 
             {/* Naver Map */}
             <div className="relative w-full h-80 md:h-[420px] rounded-lg overflow-hidden border border-gray-200">
-                <Script
-                    src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${NAVER_CLIENT_ID}`}
-                    strategy="afterInteractive"
-                    onReady={() => setScriptReady(true)}
-                />
-                <div ref={mapRef} className="absolute inset-0" />
+                {NAVER_CLIENT_ID ? (
+                    <div ref={mapRef} className="w-full h-full" />
+                ) : (
+                    <div className="flex h-full items-center justify-center text-sm text-gray-500">
+                        네이버 지도 키가 필요합니다
+                        (NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID)
+                    </div>
+                )}
             </div>
 
             {/* Controls */}

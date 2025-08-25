@@ -11,14 +11,14 @@ export default function Home() {
             </section>
 
             {/* Content container appears after scrolling */}
-            <div className="container mx-auto max-w-4xl px-4">
-                <section id="gallery" className="py-8">
+            <div className="container mx-auto max-w-4xl px-4 py-4">
+                <section id="gallery">
                     <Gallery />
                 </section>
 
                 {/* <hr className="border-t  border-gray-200" /> */}
 
-                <section id="location" className="py-2">
+                <section id="location">
                     <Location />
                 </section>
             </div>

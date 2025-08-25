@@ -7,7 +7,10 @@ type PosterProps = {
     alt?: string;
 };
 
-const Poster = ({ src = "/poster.png", alt = "Poster image" }: PosterProps) => {
+const Poster = ({
+    src = "/poster_4.png",
+    alt = "Poster image",
+}: PosterProps) => {
     return (
         <div className="relative w-screen h-svh overflow-hidden">
             <Image
