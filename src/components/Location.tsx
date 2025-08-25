@@ -20,7 +20,7 @@ declare global {
     }
 }
 
-const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID;
+const NAVER_CLIENT_ID = "vqqiozf073";
 
 const Location = () => {
     // Yangjae Citizen's Forest Outdoor Wedding Venue
@@ -33,27 +33,19 @@ const Location = () => {
     const [scriptReady, setScriptReady] = useState(false);
 
     useEffect(() => {
-        if (!scriptReady) return;
-        if (!mapRef.current) return;
-        const maps = window.naver?.maps;
-        if (!maps) return;
+        if (!scriptReady || !mapRef.current || !window.naver?.maps) return;
 
-        const center = new maps.LatLng(latitude, longitude) as unknown as {
-            y: number;
-            x: number;
-        };
-        const map = new maps.Map(mapRef.current, {
-            center,
+        const mapOptions = {
+            center: new window.naver.maps.LatLng(latitude, longitude),
             zoom: 16,
-            zoomControl: true,
-            mapDataControl: false,
-            scaleControl: false,
-        });
+        };
 
-        // marker
-        new maps.Marker({
-            position: center,
-            map,
+        const map = new window.naver.maps.Map(mapRef.current, mapOptions);
+
+        // Add marker for the venue
+        new window.naver.maps.Marker({
+            position: new window.naver.maps.LatLng(latitude, longitude),
+            map: map,
             title: placeName,
         });
     }, [scriptReady]);
@@ -91,21 +83,12 @@ const Location = () => {
 
             {/* Naver Map */}
             <div className="relative w-full h-80 md:h-[420px] rounded-lg overflow-hidden border border-gray-200">
-                {NAVER_CLIENT_ID ? (
-                    <>
-                        <Script
-                            src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${NAVER_CLIENT_ID}`}
-                            strategy="afterInteractive"
-                            onReady={() => setScriptReady(true)}
-                        />
-                        <div ref={mapRef} className="absolute inset-0" />
-                    </>
-                ) : (
-                    <div className="flex h-full items-center justify-center text-sm text-gray-500">
-                        네이버 지도 키가 필요합니다
-                        (NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID)
-                    </div>
-                )}
+                <Script
+                    src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${NAVER_CLIENT_ID}`}
+                    strategy="afterInteractive"
+                    onReady={() => setScriptReady(true)}
+                />
+                <div ref={mapRef} className="absolute inset-0" />
             </div>
 
             {/* Controls */}
