@@ -2,6 +2,8 @@ import type { RSVP } from "@/lib/supabase";
 import { supabase } from "@/lib/supabase";
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = 'edge';
+
 export async function POST(request: NextRequest) {
     try {
         const body: Partial<RSVP> = await request.json();
