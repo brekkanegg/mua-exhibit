@@ -18,7 +18,7 @@ const Poster = ({
                 src={src}
                 alt={alt}
                 fill
-                className="object-cover"
+                className="object-cover object-[30%_25%] md:object-[30%_25%]"
                 sizes="100vw"
                 priority
             />

@@ -279,7 +279,7 @@ const Location = () => {
             {/* Transportation Details */}
             <div className="grid md:grid-cols-1 max-w-3xl mx-auto">
                 {/* Subway */}
-                <div className="animate-on-scroll opacity-0 bg-blue-100 rounded-xl p-6">
+                <div className="animate-on-scroll opacity-0 bg-gray-50 rounded-xl p-6">
                     <div className="flex items-center mb-4">
                         {/* <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
                             <svg
@@ -348,7 +348,7 @@ const Location = () => {
                 </div> */}
 
                 {/* Parking */}
-                <div className="md:col-span-2 animate-on-scroll opacity-0 bg-yellow-50 rounded-xl p-6">
+                <div className="md:col-span-2 animate-on-scroll opacity-0 bg-gray-50 rounded-xl p-6">
                     <div className="flex items-center mb-4">
                         {/* <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
                             <svg
@@ -370,14 +370,14 @@ const Location = () => {
                     <div className="text-sm text-gray-600">
                         <p className="font-medium mb-2">[내비게이션]</p>
                         <p>
-                            &ldquo;양재시민의숲&rdquo; 또는 &ldquo;서울 서초구
+                            &ldquo;양재시민의숲&rdquo;, &ldquo;매헌시민의숲&rdquo; 또는 &ldquo;서울 서초구
                             매헌로 99&rdquo; 검색
                         </p>
-                        <p className="text-xs text-gray-500 mt-3">
+                        <p className="font-medium text-gray-500 mt-3 bg-red-100">
                             * 양재시민의숲 동측주차장 혹은 양재시민의숲 매헌역
                             공영주차장 이용 가능 (유료)
                             <br />* 주말에는 주차가 혼잡하니 대중교통 이용을
-                            권장합니다
+                            부탁드립니다
                         </p>
                     </div>
                 </div>
