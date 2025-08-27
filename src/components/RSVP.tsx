@@ -1,25 +1,23 @@
 "use client";
 
 import type { RSVP } from "@/lib/supabase";
-import * as Dialog from "@radix-ui/react-dialog";
 import * as Label from "@radix-ui/react-label";
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import { Calendar, Check, MessageSquare, X } from "lucide-react";
+import { Calendar, Check, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function RSVP() {
-    const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
 
     const [formData, setFormData] = useState<Partial<RSVP>>({
-        side: "신랑측",
+        side: "신랑측", // Default value, not displayed to user
         attendance: "참석",
         meal: true,
         party_size: 1,
-        message: "",
-        phone: "",
+        message: "", // Empty, not displayed to user
+        phone: "", // Empty, not displayed to user
         name: "",
     });
 
@@ -58,7 +56,6 @@ export default function RSVP() {
             if (response.ok) {
                 setSuccess(true);
                 setTimeout(() => {
-                    setOpen(false);
                     setSuccess(false);
                     // Reset form
                     setFormData({
@@ -70,7 +67,7 @@ export default function RSVP() {
                         phone: "",
                         name: "",
                     });
-                }, 2000);
+                }, 3000);
             } else {
                 alert("전송 중 오류가 발생했습니다. 다시 시도해주세요.");
             }
@@ -84,13 +81,10 @@ export default function RSVP() {
 
     return (
         <div ref={sectionRef} className="py-12 md:py-16">
-            <div className="max-w-2xl mx-auto text-center">
+            <div className="max-w-lg mx-auto px-6 text-center">
                 {/* Title Section */}
-                <div className="animate-on-scroll opacity-0 mb-12">
-                    {/* <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
-                        SAVE THE DATE
-                    </h2> */}
-                    <h3 className="text-2xl md:text-3xl font-light text-gray-700 mb-6">
+                <div className="animate-on-scroll opacity-0 mb-8 text-center">
+                    <h3 className="text-2xl md:text-3xl font-light text-gray-700 mb-4">
                         참석 여부를 전달해주세요
                     </h3>
                     <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto"></div>
@@ -144,407 +138,243 @@ export default function RSVP() {
                     </div>
                 </div>
 
-                {/* RSVP Button */}
-                <div className="animate-on-scroll opacity-0">
-                    <Dialog.Root open={open} onOpenChange={setOpen}>
-                        <Dialog.Trigger asChild>
-                            <button className="inline-flex items-center gap-2 bg-gradient-to-r from-gray-700 to-gray-800 text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all font-medium">
-                                <MessageSquare className="w-5 h-5" />
-                                참석여부 전달하기
-                            </button>
-                        </Dialog.Trigger>
+                {/* Success Message */}
+                {success && (
+                    <div className="animate-fade-in-up bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+                        <div className="flex items-center justify-center gap-3">
+                            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                <Check className="w-5 h-5 text-green-600" />
+                            </div>
+                            <div>
+                                <h4 className="font-medium text-green-800">
+                                    감사합니다!
+                                </h4>
+                                <p className="text-green-600 text-sm">
+                                    참석 여부가 전달되었습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
-                        <Dialog.Portal>
-                            <Dialog.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in" />
-                            <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-8 w-[90vw] max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl animate-in fade-in zoom-in-95">
-                                {success ? (
-                                    <div className="text-center py-8">
-                                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <Check className="w-8 h-8 text-green-600" />
-                                        </div>
-                                        <h3 className="text-xl font-medium mb-2">
-                                            감사합니다!
-                                        </h3>
-                                        <p className="text-gray-600">
-                                            참석 여부가 전달되었습니다.
-                                        </p>
-                                    </div>
-                                ) : (
-                                    <>
-                                        <Dialog.Title className="text-xl font-medium mb-6 text-center text-gray-700">
-                                            참석여부 전달하기
-                                        </Dialog.Title>
-                                        <Dialog.Close asChild>
-                                            <button
-                                                className="absolute right-4 top-4 rounded-full p-1 hover:bg-gray-100 transition-colors"
-                                                aria-label="Close"
-                                            >
-                                                <X className="h-5 w-5 text-gray-500" />
-                                            </button>
-                                        </Dialog.Close>
-
-                                        <form
-                                            onSubmit={handleSubmit}
-                                            className="space-y-6"
-                                        >
-                                            {/* Name */}
-                                            <div>
-                                                <Label.Root
-                                                    htmlFor="name"
-                                                    className="text-sm font-medium text-gray-700 block mb-2"
-                                                >
-                                                    성함 *
-                                                </Label.Root>
-                                                <input
-                                                    type="text"
-                                                    id="name"
-                                                    value={formData.name}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            name: e.target
-                                                                .value,
-                                                        })
-                                                    }
-                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
-                                                    placeholder="홍길동"
-                                                    required
-                                                />
-                                            </div>
-
-                                            {/* 신랑측/신부측 */}
-                                            <div>
-                                                <Label.Root
-                                                    htmlFor="side"
-                                                    className="text-sm font-medium text-gray-700 block mb-3"
-                                                >
-                                                    구분 *
-                                                </Label.Root>
-                                                <RadioGroup.Root
-                                                    id="side"
-                                                    value={formData.side}
-                                                    onValueChange={(value) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            side: value as
-                                                                | "신랑측"
-                                                                | "신부측",
-                                                        })
-                                                    }
-                                                    className="grid grid-cols-2 gap-3"
-                                                >
-                                                    <div className="relative">
-                                                        <RadioGroup.Item
-                                                            value="신랑측"
-                                                            id="groom"
-                                                            className="peer sr-only"
-                                                        />
-                                                        <Label.Root
-                                                            htmlFor="groom"
-                                                            className="flex items-center justify-center px-4 py-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all"
-                                                        >
-                                                            정민기 측
-                                                        </Label.Root>
-                                                    </div>
-                                                    <div className="relative">
-                                                        <RadioGroup.Item
-                                                            value="신부측"
-                                                            id="bride"
-                                                            className="peer sr-only"
-                                                        />
-                                                        <Label.Root
-                                                            htmlFor="bride"
-                                                            className="flex items-center justify-center px-4 py-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all"
-                                                        >
-                                                            임소연 측
-                                                        </Label.Root>
-                                                    </div>
-                                                </RadioGroup.Root>
-                                            </div>
-
-                                            {/* 참석/불참 */}
-                                            <div>
-                                                <Label.Root
-                                                    htmlFor="attendance"
-                                                    className="text-sm font-medium text-gray-700 block mb-3"
-                                                >
-                                                    참석 여부 *
-                                                </Label.Root>
-                                                <RadioGroup.Root
-                                                    id="attendance"
-                                                    value={formData.attendance}
-                                                    onValueChange={(value) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            attendance:
-                                                                value as
-                                                                    | "참석"
-                                                                    | "불참",
-                                                        })
-                                                    }
-                                                    className="grid grid-cols-2 gap-3"
-                                                >
-                                                    <div className="relative">
-                                                        <RadioGroup.Item
-                                                            value="참석"
-                                                            id="attend"
-                                                            className="peer sr-only"
-                                                        />
-                                                        <Label.Root
-                                                            htmlFor="attend"
-                                                            className="flex items-center justify-center px-4 py-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all"
-                                                        >
-                                                            참석
-                                                        </Label.Root>
-                                                    </div>
-                                                    <div className="relative">
-                                                        <RadioGroup.Item
-                                                            value="불참"
-                                                            id="absent"
-                                                            className="peer sr-only"
-                                                        />
-                                                        <Label.Root
-                                                            htmlFor="absent"
-                                                            className="flex items-center justify-center px-4 py-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all"
-                                                        >
-                                                            불참
-                                                        </Label.Root>
-                                                    </div>
-                                                </RadioGroup.Root>
-                                            </div>
-
-                                            {/* Show additional fields only if attending */}
-                                            {formData.attendance === "참석" && (
-                                                <>
-                                                    {/* 식사 여부 */}
-                                                    <div>
-                                                        <Label.Root
-                                                            htmlFor="meal"
-                                                            className="text-sm font-medium text-gray-700 block mb-3"
-                                                        >
-                                                            식사 여부 *
-                                                        </Label.Root>
-                                                        <RadioGroup.Root
-                                                            id="meal"
-                                                            value={
-                                                                formData.meal
-                                                                    ? "yes"
-                                                                    : "no"
-                                                            }
-                                                            onValueChange={(
-                                                                value,
-                                                            ) =>
-                                                                setFormData({
-                                                                    ...formData,
-                                                                    meal:
-                                                                        value ===
-                                                                        "yes",
-                                                                })
-                                                            }
-                                                            className="grid grid-cols-2 gap-3"
-                                                        >
-                                                            <div className="relative">
-                                                                <RadioGroup.Item
-                                                                    value="yes"
-                                                                    id="meal-yes"
-                                                                    className="peer sr-only"
-                                                                />
-                                                                <Label.Root
-                                                                    htmlFor="meal-yes"
-                                                                    className="flex items-center justify-center px-4 py-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all"
-                                                                >
-                                                                    식사 예정
-                                                                </Label.Root>
-                                                            </div>
-                                                            <div className="relative">
-                                                                <RadioGroup.Item
-                                                                    value="no"
-                                                                    id="meal-no"
-                                                                    className="peer sr-only"
-                                                                />
-                                                                <Label.Root
-                                                                    htmlFor="meal-no"
-                                                                    className="flex items-center justify-center px-4 py-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all"
-                                                                >
-                                                                    식사 안함
-                                                                </Label.Root>
-                                                            </div>
-                                                        </RadioGroup.Root>
-                                                    </div>
-
-                                                    {/* 총 인원 */}
-                                                    <div>
-                                                        <Label.Root
-                                                            htmlFor="party_size"
-                                                            className="text-sm font-medium text-gray-700 block mb-2 "
-                                                        >
-                                                            총 참석 인원 (본인
-                                                            포함) *
-                                                        </Label.Root>
-                                                        <div className="flex items-center gap-3 justify-center">
-                                                            <button
-                                                                type="button"
-                                                                onClick={() =>
-                                                                    setFormData(
-                                                                        {
-                                                                            ...formData,
-                                                                            party_size:
-                                                                                Math.max(
-                                                                                    1,
-                                                                                    (formData.party_size ||
-                                                                                        1) -
-                                                                                        1,
-                                                                                ),
-                                                                        },
-                                                                    )
-                                                                }
-                                                                className="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center justify-center"
-                                                            >
-                                                                -
-                                                            </button>
-                                                            <input
-                                                                type="number"
-                                                                id="party_size"
-                                                                min="1"
-                                                                value={
-                                                                    formData.party_size
-                                                                }
-                                                                onChange={(e) =>
-                                                                    setFormData(
-                                                                        {
-                                                                            ...formData,
-                                                                            party_size:
-                                                                                parseInt(
-                                                                                    e
-                                                                                        .target
-                                                                                        .value,
-                                                                                ) ||
-                                                                                1,
-                                                                        },
-                                                                    )
-                                                                }
-                                                                className="w-20 px-3 py-2 border border-gray-200 rounded-lg text-gray-700 text-center focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                                                                required
-                                                            />
-                                                            <button
-                                                                type="button"
-                                                                onClick={() =>
-                                                                    setFormData(
-                                                                        {
-                                                                            ...formData,
-                                                                            party_size:
-                                                                                (formData.party_size ||
-                                                                                    1) +
-                                                                                1,
-                                                                        },
-                                                                    )
-                                                                }
-                                                                className="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center justify-center"
-                                                            >
-                                                                +
-                                                            </button>
-                                                            <span className="text-sm text-gray-500">
-                                                                명
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </>
-                                            )}
-
-                                            {/* 연락처 */}
-                                            <div>
-                                                <Label.Root
-                                                    htmlFor="phone"
-                                                    className="text-sm font-medium text-gray-700 block mb-2"
-                                                >
-                                                    연락처 (선택사항)
-                                                </Label.Root>
-                                                <input
-                                                    type="tel"
-                                                    id="phone"
-                                                    value={formData.phone}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            phone: e.target
-                                                                .value,
-                                                        })
-                                                    }
-                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all"
-                                                    placeholder="010-0000-0000"
-                                                />
-                                            </div>
-
-                                            {/* 메시지 */}
-                                            <div>
-                                                <Label.Root
-                                                    htmlFor="message"
-                                                    className="text-sm font-medium text-gray-700 block mb-2"
-                                                >
-                                                    한마디 (선택 사항)
-                                                </Label.Root>
-                                                <textarea
-                                                    id="message"
-                                                    value={formData.message}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            message:
-                                                                e.target.value,
-                                                        })
-                                                    }
-                                                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all resize-none"
-                                                    rows={4}
-                                                    placeholder="축하의 마음을 전해주세요"
-                                                />
-                                            </div>
-
-                                            {/* Submit Button */}
-                                            <button
-                                                type="submit"
-                                                disabled={
-                                                    loading || !formData.name
-                                                }
-                                                className="w-full bg-gradient-to-r from-gray-700 to-gray-800 text-white py-3 px-6 rounded-lg hover:shadow-lg transform hover:scale-[1.02] transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
-                                            >
-                                                {loading ? (
-                                                    <>
-                                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                                        전송 중...
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <Check className="w-5 h-5" />
-                                                        전송하기
-                                                    </>
-                                                )}
-                                            </button>
-                                        </form>
-                                    </>
-                                )}
-                            </Dialog.Content>
-                        </Dialog.Portal>
-                    </Dialog.Root>
-                </div>
-
-                {/* Decorative bottom element */}
-                <div className="animate-on-scroll opacity-0 mt-12">
-                    <svg
-                        className="w-32 h-8 mx-auto text-gray-300"
-                        viewBox="0 0 200 30"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M50 15 Q100 5, 150 15"
-                            stroke="currentColor"
-                            strokeWidth="1"
-                            strokeLinecap="round"
-                            fill="none"
-                            opacity="0.4"
+                {/* Form */}
+                <form
+                    onSubmit={handleSubmit}
+                    className="animate-on-scroll opacity-0 space-y-6 bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300"
+                >
+                    {/* Name Field */}
+                    <div className="space-y-2">
+                        <input
+                            type="text"
+                            id="name"
+                            value={formData.name}
+                            onChange={(e) =>
+                                setFormData({
+                                    ...formData,
+                                    name: e.target.value,
+                                })
+                            }
+                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:bg-white focus:border-transparent transition-all duration-200"
+                            placeholder="이름을 입력해주세요"
+                            required
                         />
-                    </svg>
-                </div>
+                    </div>
+
+                    {/* Attendance Selection */}
+                    <div className="space-y-3">
+                        <RadioGroup.Root
+                            value={formData.attendance}
+                            onValueChange={(value) =>
+                                setFormData({
+                                    ...formData,
+                                    attendance: value as "참석" | "불참",
+                                    // Reset meal and party_size if not attending
+                                    meal:
+                                        value === "참석" ? formData.meal : true,
+                                    party_size:
+                                        value === "참석"
+                                            ? formData.party_size
+                                            : 1,
+                                })
+                            }
+                            className="flex gap-3"
+                        >
+                            <div className="flex-1">
+                                <RadioGroup.Item
+                                    value="참석"
+                                    id="attend"
+                                    className="peer sr-only"
+                                />
+                                <Label.Root
+                                    htmlFor="attend"
+                                    className="block text-center px-6 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
+                                >
+                                    참석
+                                </Label.Root>
+                            </div>
+                            <div className="flex-1">
+                                <RadioGroup.Item
+                                    value="불참"
+                                    id="absent"
+                                    className="peer sr-only"
+                                />
+                                <Label.Root
+                                    htmlFor="absent"
+                                    className="block text-center px-6 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
+                                >
+                                    불참
+                                </Label.Root>
+                            </div>
+                        </RadioGroup.Root>
+                    </div>
+
+                    {/* Additional Fields for Attending Guests */}
+                    {formData.attendance === "참석" && (
+                        <div className="space-y-6 animate-slide-down">
+                            {/* Meal Selection */}
+                            <div className="space-y-3">
+                                <RadioGroup.Root
+                                    value={formData.meal ? "yes" : "no"}
+                                    onValueChange={(value) =>
+                                        setFormData({
+                                            ...formData,
+                                            meal: value === "yes",
+                                        })
+                                    }
+                                    className="flex gap-3"
+                                >
+                                    <div className="flex-1">
+                                        <RadioGroup.Item
+                                            value="yes"
+                                            id="meal-yes"
+                                            className="peer sr-only"
+                                        />
+                                        <Label.Root
+                                            htmlFor="meal-yes"
+                                            className="block text-center px-6 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
+                                        >
+                                            식사 예정
+                                        </Label.Root>
+                                    </div>
+                                    <div className="flex-1">
+                                        <RadioGroup.Item
+                                            value="no"
+                                            id="meal-no"
+                                            className="peer sr-only"
+                                        />
+                                        <Label.Root
+                                            htmlFor="meal-no"
+                                            className="block text-center px-6 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
+                                        >
+                                            식사 안함
+                                        </Label.Root>
+                                    </div>
+                                </RadioGroup.Root>
+                            </div>
+
+                            {/* Party Size */}
+                            <div className="space-y-3">
+                                <div className="flex items-center justify-center gap-4">
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setFormData({
+                                                ...formData,
+                                                party_size: Math.max(
+                                                    1,
+                                                    (formData.party_size || 1) -
+                                                        1,
+                                                ),
+                                            })
+                                        }
+                                        className="w-12 h-12 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center text-gray-600 font-medium text-lg"
+                                        disabled={formData.party_size === 1}
+                                    >
+                                        -
+                                    </button>
+                                    <div className="flex items-center gap-2">
+                                        <input
+                                            type="number"
+                                            id="party_size"
+                                            min="1"
+                                            max="10"
+                                            value={formData.party_size}
+                                            onChange={(e) =>
+                                                setFormData({
+                                                    ...formData,
+                                                    party_size: Math.min(
+                                                        10,
+                                                        Math.max(
+                                                            1,
+                                                            parseInt(
+                                                                e.target.value,
+                                                            ) || 1,
+                                                        ),
+                                                    ),
+                                                })
+                                            }
+                                            className="w-16 px-2 py-2 bg-gray-50 border border-gray-200 rounded-xl text-center text-lg font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:bg-white focus:border-transparent"
+                                            required
+                                        />
+                                        <span className="text-gray-600 font-light">
+                                            명
+                                        </span>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setFormData({
+                                                ...formData,
+                                                party_size: Math.min(
+                                                    10,
+                                                    (formData.party_size || 1) +
+                                                        1,
+                                                ),
+                                            })
+                                        }
+                                        className="w-12 h-12 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center text-gray-600 font-medium text-lg"
+                                        disabled={formData.party_size === 10}
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                                <p className="text-xs text-gray-500 text-center">
+                                    본인 포함 인원 수
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Submit Button */}
+                    <div className="pt-4">
+                        <button
+                            type="submit"
+                            disabled={loading || !formData.name}
+                            className={`
+                                w-full py-4 px-6 rounded-xl font-medium
+                                bg-gradient-to-r from-gray-700 to-gray-900 text-white
+                                hover:from-gray-800 hover:to-black
+                                transform hover:scale-[1.01] active:scale-[0.99]
+                                transition-all duration-200
+                                disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
+                                shadow-sm hover:shadow-md
+                                flex items-center justify-center gap-3
+                            `}
+                        >
+                            {loading ? (
+                                <>
+                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                    <span>전송 중...</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Send className="w-4 h-4" />
+                                    <span>전송하기</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <style jsx>{`
@@ -572,15 +402,6 @@ export default function RSVP() {
                 }
                 :global(.animate-on-scroll:nth-child(2)) {
                     transition-delay: 100ms;
-                }
-                :global(.animate-on-scroll:nth-child(3)) {
-                    transition-delay: 200ms;
-                }
-                :global(.animate-on-scroll:nth-child(4)) {
-                    transition-delay: 300ms;
-                }
-                :global(.animate-on-scroll:nth-child(5)) {
-                    transition-delay: 400ms;
                 }
             `}</style>
         </div>

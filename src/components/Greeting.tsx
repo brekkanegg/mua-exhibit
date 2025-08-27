@@ -166,25 +166,6 @@ export default function Greeting() {
                         </div>
                     </div>
                 </div>
-
-                {/* Decorative bottom flourish */}
-                <div className="animate-on-scroll opacity-0 mt-12">
-                    <svg
-                        className="w-32 h-8 mx-auto text-gray-300"
-                        viewBox="0 0 200 30"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M50 15 Q100 5, 150 15"
-                            stroke="currentColor"
-                            strokeWidth="1"
-                            strokeLinecap="round"
-                            fill="none"
-                            opacity="0.4"
-                        />
-                    </svg>
-                </div>
             </div>
 
             <style jsx>{`

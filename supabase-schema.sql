@@ -2,7 +2,7 @@
 CREATE TABLE rsvps (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     name VARCHAR(100),
-    side VARCHAR(10) NOT NULL CHECK (side IN ('신랑측', '신부측')),
+    side VARCHAR(10) (side IN ('신랑측', '신부측')),
     attendance VARCHAR(10) NOT NULL CHECK (attendance IN ('참석', '불참')),
     meal BOOLEAN NOT NULL,
     party_size INTEGER NOT NULL CHECK (party_size >= 1),

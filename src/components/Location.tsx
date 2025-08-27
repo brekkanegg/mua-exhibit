@@ -259,7 +259,7 @@ const Location = () => {
                         카카오맵
                     </span>
                 </button>
-                <button
+                {/* <button
                     onClick={openInTmap}
                     className="flex items-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all group"
                 >
@@ -273,7 +273,7 @@ const Location = () => {
                     <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600">
                         티맵
                     </span>
-                </button>
+                </button> */}
             </div>
 
             {/* Transportation Details */}
