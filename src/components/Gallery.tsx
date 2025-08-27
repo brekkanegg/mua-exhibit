@@ -40,16 +40,6 @@ const Gallery = () => {
             alt: "Wedding Photo 6",
             gridClass: "md:col-span-1 md:row-span-1",
         },
-        {
-            src: "https://picsum.photos/400/400?random=7",
-            alt: "Wedding Photo 7",
-            gridClass: "md:col-span-1 md:row-span-1",
-        },
-        {
-            src: "https://picsum.photos/800/500?random=8",
-            alt: "Wedding Photo 8",
-            gridClass: "md:col-span-2 md:row-span-1",
-        },
     ];
 
     useEffect(() => {
@@ -101,9 +91,6 @@ const Gallery = () => {
         <div ref={sectionRef} className="py-12 md:py-16">
             {/* Title Section */}
             <div className="text-center mb-12">
-                <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
-                    PREVIEW
-                </h2>
                 <h3 className="text-2xl md:text-3xl font-light text-gray-700">
                     미리보기
                 </h3>
@@ -132,36 +119,6 @@ const Gallery = () => {
                         )}
                     </div>
                 ))}
-            </div>
-
-            {/* View More Text */}
-            <div className="text-center mt-12">
-                <button
-                    className="inline-flex items-center text-gray-500 hover:text-gray-700 transition-colors group"
-                    onClick={() =>
-                        window.scrollTo({
-                            top:
-                                document.getElementById("location")
-                                    ?.offsetTop || 0,
-                            behavior: "smooth",
-                        })
-                    }
-                >
-                    <span className="text-sm font-light tracking-wider">
-                        좀 더 보기
-                    </span>
-                    <svg
-                        className="w-4 h-4 ml-2 transform group-hover:translate-y-1 transition-transform"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                    </svg>
-                </button>
             </div>
 
             {/* Lightbox Modal */}

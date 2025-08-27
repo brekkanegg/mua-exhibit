@@ -4,7 +4,7 @@ import type { RSVP } from "@/lib/supabase";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Label from "@radix-ui/react-label";
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import { Calendar, Check, MessageSquare, Phone, Users, X } from "lucide-react";
+import { Calendar, Check, MessageSquare, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function RSVP() {
@@ -218,7 +218,7 @@ export default function RSVP() {
                                                     htmlFor="side"
                                                     className="text-sm font-medium text-gray-700 block mb-3"
                                                 >
-                                                    하객 구분 *
+                                                    구분 *
                                                 </Label.Root>
                                                 <RadioGroup.Root
                                                     id="side"
@@ -243,7 +243,7 @@ export default function RSVP() {
                                                             htmlFor="groom"
                                                             className="flex items-center justify-center px-4 py-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all"
                                                         >
-                                                            신랑측
+                                                            정민기 측
                                                         </Label.Root>
                                                     </div>
                                                     <div className="relative">
@@ -256,7 +256,7 @@ export default function RSVP() {
                                                             htmlFor="bride"
                                                             className="flex items-center justify-center px-4 py-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all"
                                                         >
-                                                            신부측
+                                                            임소연 측
                                                         </Label.Root>
                                                     </div>
                                                 </RadioGroup.Root>
@@ -376,13 +376,12 @@ export default function RSVP() {
                                                     <div>
                                                         <Label.Root
                                                             htmlFor="party_size"
-                                                            className="text-sm font-medium text-gray-700 block mb-2"
+                                                            className="text-sm font-medium text-gray-700 block mb-2 "
                                                         >
-                                                            <Users className="inline w-4 h-4 mr-1" />
                                                             총 참석 인원 (본인
                                                             포함) *
                                                         </Label.Root>
-                                                        <div className="flex items-center gap-3">
+                                                        <div className="flex items-center gap-3 justify-center">
                                                             <button
                                                                 type="button"
                                                                 onClick={() =>
@@ -458,7 +457,6 @@ export default function RSVP() {
                                                     htmlFor="phone"
                                                     className="text-sm font-medium text-gray-700 block mb-2"
                                                 >
-                                                    <Phone className="inline w-4 h-4 mr-1" />
                                                     연락처 (선택사항)
                                                 </Label.Root>
                                                 <input
@@ -483,8 +481,7 @@ export default function RSVP() {
                                                     htmlFor="message"
                                                     className="text-sm font-medium text-gray-700 block mb-2"
                                                 >
-                                                    <MessageSquare className="inline w-4 h-4 mr-1" />
-                                                    축하 메시지 (선택사항)
+                                                    한마디 (선택 사항)
                                                 </Label.Root>
                                                 <textarea
                                                     id="message"

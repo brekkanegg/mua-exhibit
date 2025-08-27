@@ -103,7 +103,7 @@ const Poster = ({ src = "/poster.png", alt = "Poster image" }: PosterProps) => {
             </div>
 
             {/* Navigation Hint - Bottom Center */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div className="absolute bottom-8 left-4/5 transform -translate-x-1/2 animate-bounce">
                 <div className="bg-white/30 backdrop-blur-md text-white rounded-full p-3 shadow-xl hover:bg-white/40 transition-all">
                     <svg
                         className="w-5 h-5 md:w-6 md:h-6"

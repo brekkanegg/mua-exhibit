@@ -28,7 +28,7 @@ export default function Greeting() {
         <div ref={sectionRef} className="py-12 md:py-16">
             <div className="max-w-2xl mx-auto text-center">
                 {/* Decorative flourish */}
-                <div className="animate-on-scroll opacity-0 mb-8">
+                {/* <div className="animate-on-scroll opacity-0 mb-8">
                     <svg
                         className="w-48 h-12 mx-auto text-gray-400"
                         viewBox="0 0 200 50"
@@ -65,13 +65,13 @@ export default function Greeting() {
                             opacity="0.3"
                         />
                     </svg>
-                </div>
+                </div> */}
 
                 {/* Title */}
                 <div className="animate-on-scroll opacity-0 mb-12">
-                    <h2 className="text-2xl md:text-3xl font-light text-gray-700 mb-2">
+                    <h3 className="text-2xl md:text-3xl font-light text-gray-700 mb-2">
                         두둔
-                    </h2>
+                    </h3>
                     <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto"></div>
                 </div>
 
@@ -124,18 +124,18 @@ export default function Greeting() {
                         <div className="flex items-center justify-center space-x-8">
                             <div className="text-right">
                                 <p className="text-sm md:text-base mb-1 text-gray-500">
-                                    <span className="font-light">정한수</span>
+                                    <span className="font-light">정찬종</span>
                                     <span className="mx-1 text-gray-400">
                                         ·
                                     </span>
-                                    <span className="font-light">김이현</span>
+                                    <span className="font-light">박정실</span>
                                     <span className="text-gray-500 ml-2 text-xs">
                                         의
                                     </span>
                                 </p>
                                 <p className="text-lg md:text-xl font-normal">
                                     <span className="text-sm text-gray-500 mr-2">
-                                        장남
+                                        차남
                                     </span>
                                     민기
                                 </p>
@@ -147,18 +147,18 @@ export default function Greeting() {
 
                             <div className="text-left">
                                 <p className="text-sm md:text-base mb-1 text-gray-500">
-                                    <span className="font-light">임종인</span>
+                                    <span className="font-light">임정근</span>
                                     <span className="mx-1 text-gray-400">
                                         ·
                                     </span>
-                                    <span className="font-light">이상미</span>
+                                    <span className="font-light">김정자</span>
                                     <span className="text-gray-500 ml-2 text-xs">
                                         의
                                     </span>
                                 </p>
                                 <p className="text-lg md:text-xl font-normal">
                                     <span className="text-sm text-gray-500 mr-2">
-                                        차녀
+                                        장녀
                                     </span>
                                     소연
                                 </p>

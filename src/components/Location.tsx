@@ -181,9 +181,9 @@ const Location = () => {
         <div ref={sectionRef} className="py-12 md:py-16">
             {/* Title Section */}
             <div className="text-center mb-12 animate-on-scroll opacity-0">
-                <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
+                {/* <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
                     LOCATION
-                </h2>
+                </h2> */}
                 <h3 className="text-2xl md:text-3xl font-light text-gray-700">
                     오시는 길
                 </h3>
