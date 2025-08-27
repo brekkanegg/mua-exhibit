@@ -171,7 +171,7 @@ export default function RSVP() {
                                     </div>
                                 ) : (
                                     <>
-                                        <Dialog.Title className="text-xl font-medium mb-6 text-center">
+                                        <Dialog.Title className="text-xl font-medium mb-6 text-center text-gray-700">
                                             참석여부 전달하기
                                         </Dialog.Title>
                                         <Dialog.Close asChild>
@@ -423,7 +423,7 @@ export default function RSVP() {
                                                                         },
                                                                     )
                                                                 }
-                                                                className="w-20 px-3 py-2 border border-gray-200 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+                                                                className="w-20 px-3 py-2 border border-gray-200 rounded-lg text-gray-700 text-center focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                                                                 required
                                                             />
                                                             <button

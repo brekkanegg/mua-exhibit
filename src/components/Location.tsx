@@ -115,7 +115,7 @@ const Location = () => {
                 if (window.naver.maps.InfoWindow && window.naver.maps.Event) {
                     const infoWindow = new window.naver.maps.InfoWindow({
                         content: `<div style="padding: 12px; min-width: 200px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-                            <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">${placeName}</h4>
+                            <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #666;">${placeName}</h4>
                             <p style="margin: 0; font-size: 12px; color: #666;">${address}</p>
                         </div>`,
                         borderWidth: 0,
@@ -181,7 +181,7 @@ const Location = () => {
         <div ref={sectionRef} className="py-12 md:py-16">
             {/* Title Section */}
             <div className="text-center mb-12 animate-on-scroll opacity-0">
-                {/* <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
+                {/* <h2 className="text-xs md:tex   t-sm font-light text-gray-500 tracking-[0.3em] mb-2">
                     LOCATION
                 </h2> */}
                 <h3 className="text-2xl md:text-3xl font-light text-gray-700">
@@ -228,7 +228,7 @@ const Location = () => {
             </div>
 
             {/* Map Navigation Buttons */}
-            <div className="flex justify-center gap-2 mb-12 animate-on-scroll opacity-0">
+            <div className="flex justify-center gap-2 mb-4 animate-on-scroll opacity-0">
                 <button
                     onClick={openInNaverMap}
                     className="flex items-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all group"
@@ -277,11 +277,11 @@ const Location = () => {
             </div>
 
             {/* Transportation Details */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div className="grid md:grid-cols-1 max-w-3xl mx-auto">
                 {/* Subway */}
                 <div className="animate-on-scroll opacity-0 bg-gray-50 rounded-xl p-6">
                     <div className="flex items-center mb-4">
-                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                        {/* <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
                             <svg
                                 className="w-6 h-6 text-white"
                                 fill="none"
@@ -293,28 +293,25 @@ const Location = () => {
                             >
                                 <path d="M8 7h8m0 0v10m0-10L8 17V7"></path>
                             </svg>
-                        </div>
+                        </div> */}
                         <h4 className="text-lg font-medium text-gray-800">
-                            지하철
+                            대중교통 이용 시
                         </h4>
                     </div>
                     <div className="space-y-2 text-sm text-gray-600">
                         <p>
-                            <span className="inline-block px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-medium mr-2">
-                                3호선
-                            </span>
-                            <span className="font-medium">[양재역]</span> 9번
-                            출구로 나와
-                        </p>
-                        <p className="ml-4">양재시민의숲 방향 도보 10분</p>
-                        <p className="text-xs text-gray-500 mt-2">
-                            * 또는 양재역에서 버스 이용 가능
+                            {/* <span className="inline-block px-2 py-1 bg-red-100 text-white-700 rounded text-xs font-medium mr-2">
+                                신분당선
+                            </span> */}
+                            <span className="font-medium">
+                                [양재시민의숲역] 에서 도보 5분
+                            </span>{" "}
                         </p>
                     </div>
                 </div>
 
                 {/* Bus */}
-                <div className="animate-on-scroll opacity-0 bg-gray-50 rounded-xl p-6">
+                {/* <div className="animate-on-scroll opacity-0 bg-gray-50 rounded-xl p-6">
                     <div className="flex items-center mb-4">
                         <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
                             <svg
@@ -348,12 +345,12 @@ const Location = () => {
                             [양재시민의숲] 정류장 하차
                         </p>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Parking */}
                 <div className="md:col-span-2 animate-on-scroll opacity-0 bg-yellow-50 rounded-xl p-6">
                     <div className="flex items-center mb-4">
-                        <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
+                        {/* <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
                             <svg
                                 className="w-6 h-6 text-white"
                                 fill="none"
@@ -365,9 +362,9 @@ const Location = () => {
                             >
                                 <path d="M5 13l4 4L19 7"></path>
                             </svg>
-                        </div>
+                        </div> */}
                         <h4 className="text-lg font-medium text-gray-800">
-                            자가용
+                            자가용 이용 시
                         </h4>
                     </div>
                     <div className="text-sm text-gray-600">
@@ -376,11 +373,11 @@ const Location = () => {
                             &ldquo;양재시민의숲&rdquo; 또는 &ldquo;서울 서초구
                             매헌로 99&rdquo; 검색
                         </p>
-                        <p>양재대로 또는 강남대로에서 진입 가능</p>
                         <p className="text-xs text-gray-500 mt-3">
-                            * 양재시민의숲 주차장 이용 가능 (유료)
-                            <br />* 주말에는 주차가 혼잡할 수 있으니 대중교통
-                            이용을 권장합니다
+                            * 양재시민의숲 동측주차장 혹은 양재시민의숲 매헌역
+                            공영주차장 이용 가능 (유료)
+                            <br />* 주말에는 주차가 혼잡하니 대중교통 이용을
+                            권장합니다
                         </p>
                     </div>
                 </div>

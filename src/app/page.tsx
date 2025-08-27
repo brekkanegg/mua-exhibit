@@ -20,7 +20,7 @@ export default function Home() {
             </section>
 
             {/* Gallery section - White BG */}
-            <section id="gallery" className="bg-white border-t border-gray-100">
+            <section id="gallery" className="bg-white ">
                 <div className="container mx-auto max-w-4xl px-4">
                     <Gallery />
                 </div>
@@ -29,7 +29,7 @@ export default function Home() {
             {/* Location section - Light Gray BG */}
             <section
                 id="location"
-                className="bg-gray-50 border-t border-gray-100"
+                className="bg-gray-50 "
             >
                 <div className="container mx-auto max-w-4xl px-4">
                     <Location />
@@ -37,7 +37,7 @@ export default function Home() {
             </section>
 
             {/* RSVP Section - White BG */}
-            <section id="rsvp" className="bg-white border-t border-gray-100">
+            <section id="rsvp" className="bg-white ">
                 <div className="container mx-auto max-w-4xl px-4">
                     <RSVP />
                 </div>
