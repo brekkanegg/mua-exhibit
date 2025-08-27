@@ -279,7 +279,7 @@ const Location = () => {
             {/* Transportation Details */}
             <div className="grid md:grid-cols-1 max-w-3xl mx-auto">
                 {/* Subway */}
-                <div className="animate-on-scroll opacity-0 bg-gray-50 rounded-xl p-6">
+                <div className="animate-on-scroll opacity-0 bg-blue-100 rounded-xl p-6">
                     <div className="flex items-center mb-4">
                         {/* <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
                             <svg
