@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 declare global {
@@ -35,13 +36,35 @@ declare global {
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID;
 
 const Location = () => {
-    // Yangjae Citizen's Forest Outdoor Wedding Venue
+    // Venue information
     const placeName = "양재시민의숲 야외예식장";
+    const address = "서울 서초구 매헌로 99";
     const latitude = 37.4705198; // Google Maps 좌표
     const longitude = 127.0353278;
     const naverPlaceId = "31875178";
 
     const mapRef = useRef<HTMLDivElement | null>(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // Animation observer
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("animate-fade-in-up");
+                    }
+                });
+            },
+            { threshold: 0.1 },
+        );
+
+        const elements =
+            sectionRef.current?.querySelectorAll(".animate-on-scroll");
+        elements?.forEach((el) => observer.observe(el));
+
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         if (!NAVER_CLIENT_ID) {
@@ -60,10 +83,14 @@ const Location = () => {
             if (mapRef.current && window.naver && window.naver.maps) {
                 const mapOptions = {
                     center: new window.naver.maps.LatLng(latitude, longitude),
-                    zoom: 17, // 더 가까운 줌 레벨로 조정
-                    mapTypeControl: true,
-                    scaleControl: true,
+                    zoom: 16,
+                    mapTypeControl: false,
+                    scaleControl: false,
                     zoomControl: true,
+                    zoomControlOptions: {
+                        style: 2,
+                        position: 7,
+                    },
                 };
 
                 const map = new window.naver.maps.Map(
@@ -71,30 +98,35 @@ const Location = () => {
                     mapOptions,
                 );
 
-                // Add marker with more options
+                // Add marker
                 const markerOptions: Record<string, unknown> = {
                     position: new window.naver.maps.LatLng(latitude, longitude),
                     map: map,
                     title: placeName,
                 };
 
-                // Add animation if available
                 if (window.naver.maps.Animation?.DROP) {
                     markerOptions.animation = window.naver.maps.Animation.DROP;
                 }
 
                 const marker = new window.naver.maps.Marker(markerOptions);
 
-                // Add info window if available
+                // Add info window
                 if (window.naver.maps.InfoWindow && window.naver.maps.Event) {
                     const infoWindow = new window.naver.maps.InfoWindow({
-                        content: `<div style="padding: 10px; min-width: 150px;">
-                            <h4 style="margin: 0 0 5px 0;">${placeName}</h4>
-                            <p style="margin: 0; font-size: 12px;">서울 서초구 매헌로 99</p>
+                        content: `<div style="padding: 12px; min-width: 200px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                            <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">${placeName}</h4>
+                            <p style="margin: 0; font-size: 12px; color: #666;">${address}</p>
                         </div>`,
+                        borderWidth: 0,
+                        anchorSize: { width: 10, height: 10 },
+                        backgroundColor: "white",
+                        borderColor: "#e0e0e0",
                     });
 
-                    // Show info window on marker click
+                    // Show info window by default
+                    infoWindow.open(map, marker);
+
                     window.naver.maps.Event.addListener(marker, "click", () => {
                         if (infoWindow.getMap()) {
                             infoWindow.close();
@@ -108,7 +140,6 @@ const Location = () => {
 
         document.head.appendChild(script);
 
-        // Cleanup
         return () => {
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
@@ -120,19 +151,17 @@ const Location = () => {
         const schemeUrl = `nmap://place?id=${naverPlaceId}`;
         const webUrl = `https://map.naver.com/p/entry/place/${naverPlaceId}`;
 
-        // Try app scheme first; fallback to web
         const timeout = setTimeout(() => {
             window.open(webUrl, "_blank");
         }, 800);
         window.location.href = schemeUrl;
-        // If app handled, navigation changes and timeout likely won't fire; best-effort approach
         setTimeout(() => clearTimeout(timeout), 1500);
     };
 
     const openInKakaoMap = () => {
         const schemeUrl = "kakaomap://place?id=24692652";
         const webUrl =
-            "https://map.kakao.com/?map_type=TYPE_MAP&itemId=24692652&urlLevel=3&urlX=508602&urlY=1103020";
+            "https://map.kakao.com/?map_type=TYPE_MAP&itemId=24692652";
 
         const timeout = setTimeout(() => {
             window.open(webUrl, "_blank");
@@ -141,39 +170,261 @@ const Location = () => {
         setTimeout(() => clearTimeout(timeout), 1500);
     };
 
-    return (
-        <div className="space-y-12 mt-12">
-            <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
-                Location
-            </h2>
+    const openInTmap = () => {
+        const webUrl = `https://apis.openapi.sk.com/tmap/app/routes?appKey=l7xx8d5a0b0b5c7e4e6ba0c0e0e0e0e0e0e0&name=${encodeURIComponent(
+            placeName,
+        )}&lon=${longitude}&lat=${latitude}`;
+        window.open(webUrl, "_blank");
+    };
 
-            {/* Naver Map */}
-            <div className="relative w-full h-80 md:h-[420px] rounded-lg overflow-hidden border border-gray-200">
-                {NAVER_CLIENT_ID ? (
-                    <div ref={mapRef} className="w-full h-full" />
-                ) : (
-                    <div className="flex h-full items-center justify-center text-sm text-gray-500">
-                        네이버 지도 키가 필요합니다
-                        (NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID)
-                    </div>
-                )}
+    return (
+        <div ref={sectionRef} className="py-12 md:py-16">
+            {/* Title Section */}
+            <div className="text-center mb-12 animate-on-scroll opacity-0">
+                <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
+                    LOCATION
+                </h2>
+                <h3 className="text-2xl md:text-3xl font-light text-gray-700">
+                    오시는 길
+                </h3>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto mt-4"></div>
             </div>
 
-            {/* Controls */}
-            <div className="flex justify-center gap-3">
+            {/* Venue Information */}
+            <div className="text-center mb-8 animate-on-scroll opacity-0">
+                <p className="text-lg md:text-xl font-normal text-gray-800 mb-2">
+                    {placeName}
+                </p>
+                <p className="text-sm md:text-base text-gray-600">{address}</p>
+            </div>
+
+            {/* Map Container */}
+            <div className="animate-on-scroll opacity-0 mb-8">
+                <div className="relative w-full h-[350px] md:h-[450px] rounded-xl overflow-hidden shadow-lg">
+                    {NAVER_CLIENT_ID ? (
+                        <div ref={mapRef} className="w-full h-full" />
+                    ) : (
+                        <div className="flex h-full items-center justify-center bg-gray-100">
+                            <div className="text-center">
+                                <svg
+                                    className="w-16 h-16 text-gray-400 mx-auto mb-4"
+                                    fill="none"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <p className="text-sm text-gray-500">
+                                    지도를 불러올 수 없습니다
+                                </p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Map Navigation Buttons */}
+            <div className="flex justify-center gap-2 mb-12 animate-on-scroll opacity-0">
                 <button
                     onClick={openInNaverMap}
-                    className="px-5 py-3 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition-colors"
+                    className="flex items-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all group"
                 >
-                    네이버 지도에서 열기
+                    <Image
+                        src="/navermap.webp"
+                        alt="Naver Map"
+                        width={20}
+                        height={20}
+                        className="rounded"
+                    />
+                    <span className="text-sm font-medium text-gray-700 group-hover:text-green-600">
+                        네이버지도
+                    </span>
                 </button>
                 <button
                     onClick={openInKakaoMap}
-                    className="px-5 py-3 rounded-md bg-yellow-500 text-white hover:bg-yellow-600 transition-colors"
+                    className="flex items-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-200 hover:border-yellow-500 hover:bg-yellow-50 transition-all group"
                 >
-                    카카오맵에서 열기
+                    <Image
+                        src="/kakaomap.png"
+                        alt="Kakao Map"
+                        width={20}
+                        height={20}
+                        className="rounded"
+                    />
+                    <span className="text-sm font-medium text-gray-700 group-hover:text-yellow-600">
+                        카카오맵
+                    </span>
+                </button>
+                <button
+                    onClick={openInTmap}
+                    className="flex items-center gap-2 px-4 py-3 rounded-lg bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-all group"
+                >
+                    <Image
+                        src="/tmap.webp"
+                        alt="T Map"
+                        width={20}
+                        height={20}
+                        className="rounded"
+                    />
+                    <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600">
+                        티맵
+                    </span>
                 </button>
             </div>
+
+            {/* Transportation Details */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                {/* Subway */}
+                <div className="animate-on-scroll opacity-0 bg-gray-50 rounded-xl p-6">
+                    <div className="flex items-center mb-4">
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                            <svg
+                                className="w-6 h-6 text-white"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path d="M8 7h8m0 0v10m0-10L8 17V7"></path>
+                            </svg>
+                        </div>
+                        <h4 className="text-lg font-medium text-gray-800">
+                            지하철
+                        </h4>
+                    </div>
+                    <div className="space-y-2 text-sm text-gray-600">
+                        <p>
+                            <span className="inline-block px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-medium mr-2">
+                                3호선
+                            </span>
+                            <span className="font-medium">[양재역]</span> 9번
+                            출구로 나와
+                        </p>
+                        <p className="ml-4">양재시민의숲 방향 도보 10분</p>
+                        <p className="text-xs text-gray-500 mt-2">
+                            * 또는 양재역에서 버스 이용 가능
+                        </p>
+                    </div>
+                </div>
+
+                {/* Bus */}
+                <div className="animate-on-scroll opacity-0 bg-gray-50 rounded-xl p-6">
+                    <div className="flex items-center mb-4">
+                        <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                            <svg
+                                className="w-6 h-6 text-white"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path d="M8 7v10m0-10h8v10m-8 0h8m0 0V7m0 10l4-4m-4 4l-4-4"></path>
+                            </svg>
+                        </div>
+                        <h4 className="text-lg font-medium text-gray-800">
+                            버스
+                        </h4>
+                    </div>
+                    <div className="space-y-2 text-sm text-gray-600">
+                        <div>
+                            <p className="font-medium mb-1">간선</p>
+                            <p className="text-blue-600">
+                                405, 421, 140, 407, 408
+                            </p>
+                        </div>
+                        <div>
+                            <p className="font-medium mb-1">지선</p>
+                            <p className="text-green-600">4432</p>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-2">
+                            [양재시민의숲] 정류장 하차
+                        </p>
+                    </div>
+                </div>
+
+                {/* Parking */}
+                <div className="md:col-span-2 animate-on-scroll opacity-0 bg-yellow-50 rounded-xl p-6">
+                    <div className="flex items-center mb-4">
+                        <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
+                            <svg
+                                className="w-6 h-6 text-white"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h4 className="text-lg font-medium text-gray-800">
+                            자가용
+                        </h4>
+                    </div>
+                    <div className="text-sm text-gray-600">
+                        <p className="font-medium mb-2">[내비게이션]</p>
+                        <p>
+                            &ldquo;양재시민의숲&rdquo; 또는 &ldquo;서울 서초구
+                            매헌로 99&rdquo; 검색
+                        </p>
+                        <p>양재대로 또는 강남대로에서 진입 가능</p>
+                        <p className="text-xs text-gray-500 mt-3">
+                            * 양재시민의숲 주차장 이용 가능 (유료)
+                            <br />* 주말에는 주차가 혼잡할 수 있으니 대중교통
+                            이용을 권장합니다
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <style jsx>{`
+                @keyframes fade-in-up {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                :global(.animate-fade-in-up) {
+                    animation: fade-in-up 0.8s ease-out forwards;
+                }
+
+                :global(.animate-on-scroll) {
+                    transition: all 0.8s ease-out;
+                }
+
+                :global(.animate-on-scroll:nth-child(1)) {
+                    transition-delay: 0ms;
+                }
+                :global(.animate-on-scroll:nth-child(2)) {
+                    transition-delay: 100ms;
+                }
+                :global(.animate-on-scroll:nth-child(3)) {
+                    transition-delay: 200ms;
+                }
+                :global(.animate-on-scroll:nth-child(4)) {
+                    transition-delay: 300ms;
+                }
+                :global(.animate-on-scroll:nth-child(5)) {
+                    transition-delay: 400ms;
+                }
+                :global(.animate-on-scroll:nth-child(6)) {
+                    transition-delay: 500ms;
+                }
+            `}</style>
         </div>
     );
 };

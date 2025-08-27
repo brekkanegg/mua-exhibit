@@ -1,27 +1,47 @@
 import Gallery from "@/components/Gallery";
+import Greeting from "@/components/Greeting";
 import Location from "@/components/Location";
 import Poster from "@/components/Poster";
+import RSVP from "@/components/RSVP";
 
 export default function Home() {
     return (
-        <main className="min-h-screen bg-white">
-            {/* Full-bleed poster first */}
-            <section id="poster">
+        <main className="min-h-screen">
+            {/* Full-bleed poster first - White BG */}
+            <section id="poster" className="bg-white">
                 <Poster />
             </section>
 
-            {/* Content container appears after scrolling */}
-            <div className="container mx-auto max-w-4xl px-4 py-4">
-                <section id="gallery">
+            {/* Greeting section - Light Gray BG */}
+            <section id="greeting" className="bg-gray-50">
+                <div className="container mx-auto max-w-4xl px-4">
+                    <Greeting />
+                </div>
+            </section>
+
+            {/* Gallery section - White BG */}
+            <section id="gallery" className="bg-white border-t border-gray-100">
+                <div className="container mx-auto max-w-4xl px-4">
                     <Gallery />
-                </section>
+                </div>
+            </section>
 
-                {/* <hr className="border-t  border-gray-200" /> */}
-
-                <section id="location">
+            {/* Location section - Light Gray BG */}
+            <section
+                id="location"
+                className="bg-gray-50 border-t border-gray-100"
+            >
+                <div className="container mx-auto max-w-4xl px-4">
                     <Location />
-                </section>
-            </div>
+                </div>
+            </section>
+
+            {/* RSVP Section - White BG */}
+            <section id="rsvp" className="bg-white border-t border-gray-100">
+                <div className="container mx-auto max-w-4xl px-4">
+                    <RSVP />
+                </div>
+            </section>
         </main>
     );
 }
