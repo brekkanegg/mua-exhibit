@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
                 hostname: "picsum.photos",
                 pathname: "/**",
             },
+            {
+                protocol: "https",
+                hostname: "pub-34a03a158e044cd68732e68b99779924.r2.dev",
+                pathname: "/**",
+            },
         ],
     },
 };

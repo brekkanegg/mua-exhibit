@@ -1,5 +1,6 @@
 "use client";
 
+import { R2_BUCKET_URL } from "@/lib/constants";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -11,33 +12,33 @@ const Gallery = () => {
     // Wedding photo gallery - replace these with actual wedding photos
     const images = [
         {
-            src: "https://picsum.photos/400/500?random=1",
-            alt: "Wedding Photo 1",
+            src: `${R2_BUCKET_URL}/poster.jpg`,
+            alt: "Exhibit Photo 1",
             gridClass: "md:col-span-1 md:row-span-2",
         },
         {
-            src: "https://picsum.photos/400/300?random=2",
-            alt: "Wedding Photo 2",
+            src: `${R2_BUCKET_URL}/poster.jpg`,
+            alt: "Exhibit Photo 2",
             gridClass: "md:col-span-1 md:row-span-1",
         },
         {
-            src: "https://picsum.photos/400/600?random=3",
-            alt: "Wedding Photo 3",
+            src: `${R2_BUCKET_URL}/poster.jpg`,
+            alt: "Exhibit Photo 3",
             gridClass: "md:col-span-1 md:row-span-2",
         },
         {
-            src: "https://picsum.photos/400/300?random=4",
-            alt: "Wedding Photo 4",
+            src: `${R2_BUCKET_URL}/poster.jpg`,
+            alt: "Exhibit Photo 4",
             gridClass: "md:col-span-1 md:row-span-1",
         },
         {
-            src: "https://picsum.photos/800/400?random=5",
-            alt: "Wedding Photo 5",
+            src: `${R2_BUCKET_URL}/poster.jpg`,
+            alt: "Exhibit Photo 5",
             gridClass: "md:col-span-2 md:row-span-1",
         },
         {
-            src: "https://picsum.photos/400/400?random=6",
-            alt: "Wedding Photo 6",
+            src: `${R2_BUCKET_URL}/poster.jpg`,
+            alt: "Exhibit Photo 6",
             gridClass: "md:col-span-1 md:row-span-1",
         },
     ];

@@ -1,5 +1,6 @@
 "use client";
 
+import { R2_BUCKET_URL } from "@/lib/constants";
 import Image from "next/image";
 
 type PosterProps = {
@@ -7,9 +8,12 @@ type PosterProps = {
     alt?: string;
 };
 
-const Poster = ({ src = "/poster.png", alt = "Poster image" }: PosterProps) => {
+const Poster = ({
+    src = `${R2_BUCKET_URL}/poster.jpg`,
+    alt = "Poster image",
+}: PosterProps) => {
     return (
-        <div className="relative w-screen h-svh overflow-hidden">
+    <div className="relative w-screen h-svh overflow-hidden">
             <Image
                 src={src}
                 alt={alt}
