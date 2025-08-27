@@ -13,7 +13,7 @@ const Poster = ({
     alt = "Poster image",
 }: PosterProps) => {
     return (
-    <div className="relative w-screen h-svh overflow-hidden">
+        <div className="relative w-screen h-svh overflow-hidden">
             <Image
                 src={src}
                 alt={alt}
@@ -62,7 +62,7 @@ const Poster = ({
                                         "2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)",
                                 }}
                             >
-                                13:00-14:30 CORETIME
+                                13:00-14:00 CORETIME
                             </p>
                         </div>
                     </div>

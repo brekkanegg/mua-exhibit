@@ -87,9 +87,9 @@ export default function RSVP() {
             <div className="max-w-2xl mx-auto text-center">
                 {/* Title Section */}
                 <div className="animate-on-scroll opacity-0 mb-12">
-                    <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
+                    {/* <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
                         SAVE THE DATE
-                    </h2>
+                    </h2> */}
                     <h3 className="text-2xl md:text-3xl font-light text-gray-700 mb-6">
                         참석 여부를 전달해주세요
                     </h3>
@@ -121,7 +121,7 @@ export default function RSVP() {
                         <div className="flex items-center justify-center gap-2 mb-3">
                             <Calendar className="w-5 h-5 text-gray-500" />
                             <span className="text-gray-700 font-medium">
-                                10월 12일 일요일 낮 12시 - 3시
+                                10월 12일 일요일 오후 1시
                             </span>
                         </div>
                         <div className="flex items-center justify-center gap-2">

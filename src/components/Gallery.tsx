@@ -106,7 +106,6 @@ const Gallery = () => {
                         className={`gallery-item relative overflow-hidden rounded-lg cursor-pointer group opacity-0 ${image.gridClass}`}
                         onClick={() => openLightbox(index)}
                     >
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10"></div>
                         <Image
                             src={image.src}
                             alt={image.alt}
@@ -147,7 +146,7 @@ const Gallery = () => {
                     </button>
 
                     <button
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-50"
                         onClick={(e) => {
                             e.stopPropagation();
                             navigateImage("prev");
@@ -168,7 +167,7 @@ const Gallery = () => {
                     </button>
 
                     <button
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-50"
                         onClick={(e) => {
                             e.stopPropagation();
                             navigateImage("next");
