@@ -70,7 +70,7 @@ export default function Greeting() {
                 {/* Title */}
                 <div className="animate-on-scroll opacity-0 mb-12">
                     <h3 className="text-2xl md:text-3xl font-light text-gray-700 mb-2">
-                        두둔
+                        결혼합니다
                     </h3>
                     <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto"></div>
                 </div>
@@ -79,41 +79,46 @@ export default function Greeting() {
                 <div className="space-y-2 text-gray-600 font-light leading-relaxed">
                     <div className="animate-on-scroll opacity-0">
                         <p className="text-base md:text-lg mb-3">
-                            각자 서로 다른 길을
+                            함께 맞이하는 여섯 번째 가을,
                         </p>
                         <p className="text-base md:text-lg mb-3">
-                            걸어온 저희가 이제 부부의 연으로
+                            닮은 듯 점점 더 닮아가는 저희 두 사람은
                         </p>
                         <p className="text-base md:text-lg">
-                            한 길을 걸어가고자 합니다.
+                            서로의 가장 친한 친구이자 평생의 동반자가 되고자
+                            합니다.
                         </p>
                     </div>
 
                     {/* Divider */}
-                    <div className="animate-on-scroll opacity-0 py-4">
+                    <div className="animate-on-scroll opacity-0">
                         <span className="text-2xl text-gray-300">·</span>
                     </div>
 
                     <div className="animate-on-scroll opacity-0">
                         <p className="text-base md:text-lg mb-3">
-                            항상 서로를 생각하며,
+                            웃음과 행복을 나누며 살아가는 부부로 살겠습니다.
+                        </p>
+                        <p className="text-base md:text-lg mb-3">
+                            늘 소박한 식을 꿈꿔온 마음을 담아
                         </p>
                         <p className="text-base md:text-lg">
-                            서로 아껴주고 사랑하며 살겠습니다.
+                            가까운 가족들과 함께 조용히 예식을 올리게 됐습니다.
                         </p>
                     </div>
 
                     {/* Divider */}
-                    <div className="animate-on-scroll opacity-0 py-4">
+                    <div className="animate-on-scroll opacity-0">
                         <span className="text-2xl text-gray-300">·</span>
                     </div>
 
                     <div className="animate-on-scroll opacity-0">
                         <p className="text-base md:text-lg mb-3">
-                            부디 참석해 주시어 저희의 약속을
+                            멀리서도 축하해주시는 모든 분들께 진심으로
+                            감사드리며,
                         </p>
                         <p className="text-base md:text-lg">
-                            따뜻한 격려로 축복해 주시기 바랍니다.
+                            그 마음 간직하며 살겠습니다.
                         </p>
                     </div>
                 </div>
@@ -135,7 +140,7 @@ export default function Greeting() {
                                 </p>
                                 <p className="text-lg md:text-xl font-normal">
                                     <span className="text-sm text-gray-500 mr-2">
-                                        차남
+                                        아들
                                     </span>
                                     민기
                                 </p>
@@ -158,7 +163,7 @@ export default function Greeting() {
                                 </p>
                                 <p className="text-lg md:text-xl font-normal">
                                     <span className="text-sm text-gray-500 mr-2">
-                                        장녀
+                                        딸
                                     </span>
                                     소연
                                 </p>

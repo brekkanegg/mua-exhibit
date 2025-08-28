@@ -12,32 +12,32 @@ const Gallery = () => {
     // Wedding photo gallery - replace these with actual wedding photos
     const images = [
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/family/1.jpg`,
             alt: "Exhibit Photo 1",
             gridClass: "md:col-span-1 md:row-span-2",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/family/2.jpg`,
             alt: "Exhibit Photo 2",
             gridClass: "md:col-span-1 md:row-span-1",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/family/3.jpg`,
             alt: "Exhibit Photo 3",
             gridClass: "md:col-span-1 md:row-span-2",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/family/5.jpg`,
             alt: "Exhibit Photo 4",
             gridClass: "md:col-span-1 md:row-span-1",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/family/4.jpg`,
             alt: "Exhibit Photo 5",
             gridClass: "md:col-span-2 md:row-span-1",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/family/6.jpg`,
             alt: "Exhibit Photo 6",
             gridClass: "md:col-span-1 md:row-span-1",
         },
@@ -92,8 +92,11 @@ const Gallery = () => {
         <div ref={sectionRef} className="py-12 md:py-16">
             {/* Title Section */}
             <div className="text-center mb-12">
+                <h2 className="text-xs md:text-sm font-light text-gray-500 tracking-[0.3em] mb-2">
+                    GALLERY
+                </h2>
                 <h3 className="text-2xl md:text-3xl font-light text-gray-700">
-                    미리보기
+                    갤러리
                 </h3>
                 <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto mt-4"></div>
             </div>

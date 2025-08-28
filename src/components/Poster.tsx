@@ -33,7 +33,7 @@ const Poster = ({
                                 "2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)",
                         }}
                     >
-                        양재시민의숲 야외예식장
+                        2025.10.12 일요일
                     </h1>
                     <div className="space-y-0.5 mt-1">
                         <p
@@ -43,28 +43,8 @@ const Poster = ({
                                     "2px 2px 10px rgba(0,0,0,0.9), 0 0 25px rgba(0,0,0,0.8)",
                             }}
                         >
-                            2025.10.12 일요일
+                            우리 결혼합니다
                         </p>
-                        <div className="space-y-0 mt-1">
-                            <p
-                                className="text-base sm:text-lg md:text-xl lg:text-2xl font-light leading-snug"
-                                style={{
-                                    textShadow:
-                                        "2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)",
-                                }}
-                            >
-                                12:00 - 15:00
-                            </p>
-                            <p
-                                className="text-xs sm:text-sm md:text-base lg:text-lg font-light italic leading-snug"
-                                style={{
-                                    textShadow:
-                                        "2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)",
-                                }}
-                            >
-                                13:00-14:00 CORETIME
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -73,7 +53,7 @@ const Poster = ({
             <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 lg:left-16">
                 <div className="text-white">
                     <div className="space-y-2">
-                        <h2
+                        <h1
                             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.2em] leading-tight"
                             style={{
                                 textShadow:
@@ -81,27 +61,7 @@ const Poster = ({
                             }}
                         >
                             정민기 임소연
-                        </h2>
-                        <div className="space-y-0.5">
-                            <p
-                                className="text-sm sm:text-base md:text-lg lg:text-xl font-light tracking-[0.25em] leading-snug"
-                                style={{
-                                    textShadow:
-                                        "2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)",
-                                }}
-                            >
-                                사진전
-                            </p>
-                            <p
-                                className="text-base sm:text-lg md:text-xl lg:text-2xl font-light italic tracking-wider leading-snug"
-                                style={{
-                                    textShadow:
-                                        "2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)",
-                                }}
-                            >
-                                242 Days to Somewhere
-                            </p>
-                        </div>
+                        </h1>
                     </div>
                 </div>
             </div>
