@@ -84,9 +84,11 @@ export default function Greeting() {
                         <p className="text-base md:text-lg mb-3">
                             닮은 듯 점점 더 닮아가는 저희 두 사람은
                         </p>
+                        <p className="text-base md:text-lg mb-3">
+                            서로의 가장 친한 친구이자
+                        </p>
                         <p className="text-base md:text-lg">
-                            서로의 가장 친한 친구이자 평생의 동반자가 되고자
-                            합니다.
+                            평생의 동반자가 되고자 합니다.
                         </p>
                     </div>
 
@@ -114,8 +116,10 @@ export default function Greeting() {
 
                     <div className="animate-on-scroll opacity-0">
                         <p className="text-base md:text-lg mb-3">
-                            멀리서도 축하해주시는 모든 분들께 진심으로
-                            감사드리며,
+                            멀리서도 축하해주시는 모든 분들께
+                        </p>
+                        <p className="text-base md:text-lg mb-3">
+                            진심으로 감사드리며,
                         </p>
                         <p className="text-base md:text-lg">
                             그 마음 간직하며 살겠습니다.
