@@ -117,55 +117,6 @@ export default function Greeting() {
                         </p>
                     </div>
                 </div>
-
-                {/* Names section */}
-                <div className="animate-on-scroll opacity-0 mt-16">
-                    <div className="space-y-6 text-gray-600">
-                        <div className="flex items-center justify-center space-x-8">
-                            <div className="text-right">
-                                <p className="text-sm md:text-base mb-1 text-gray-500">
-                                    <span className="font-light">정찬종</span>
-                                    <span className="mx-1 text-gray-400">
-                                        ·
-                                    </span>
-                                    <span className="font-light">박정실</span>
-                                    <span className="text-gray-500 ml-2 text-xs">
-                                        의
-                                    </span>
-                                </p>
-                                <p className="text-lg md:text-xl font-normal">
-                                    <span className="text-sm text-gray-500 mr-2">
-                                        차남
-                                    </span>
-                                    민기
-                                </p>
-                            </div>
-
-                            <div className="text-2xl text-gray-300 font-light">
-                                &
-                            </div>
-
-                            <div className="text-left">
-                                <p className="text-sm md:text-base mb-1 text-gray-500">
-                                    <span className="font-light">임정근</span>
-                                    <span className="mx-1 text-gray-400">
-                                        ·
-                                    </span>
-                                    <span className="font-light">김정자</span>
-                                    <span className="text-gray-500 ml-2 text-xs">
-                                        의
-                                    </span>
-                                </p>
-                                <p className="text-lg md:text-xl font-normal">
-                                    <span className="text-sm text-gray-500 mr-2">
-                                        장녀
-                                    </span>
-                                    소연
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <style jsx>{`

@@ -12,34 +12,34 @@ const Gallery = () => {
     // Wedding photo gallery - replace these with actual wedding photos
     const images = [
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/main/1.jpg`,
             alt: "Exhibit Photo 1",
-            gridClass: "md:col-span-1 md:row-span-2",
+            gridClass: "md:col-span-2 md:row-span-2",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/main/6.jpg`,
             alt: "Exhibit Photo 2",
             gridClass: "md:col-span-1 md:row-span-1",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/main/3.jpg`,
             alt: "Exhibit Photo 3",
             gridClass: "md:col-span-1 md:row-span-2",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/main/4.jpg`,
             alt: "Exhibit Photo 4",
             gridClass: "md:col-span-1 md:row-span-1",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/main/5.jpg`,
             alt: "Exhibit Photo 5",
-            gridClass: "md:col-span-2 md:row-span-1",
+            gridClass: "md:col-span-2 md:row-span-2",
         },
         {
-            src: `${R2_BUCKET_URL}/poster.jpg`,
+            src: `${R2_BUCKET_URL}/main/2.jpg`,
             alt: "Exhibit Photo 6",
-            gridClass: "md:col-span-1 md:row-span-1",
+            gridClass: "md:col-span-2 md:row-span-2",
         },
     ];
 
