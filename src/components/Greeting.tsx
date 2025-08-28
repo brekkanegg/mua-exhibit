@@ -69,51 +69,70 @@ export default function Greeting() {
 
                 {/* Title */}
                 <div className="animate-on-scroll opacity-0 mb-12">
-                    <h3 className="text-2xl md:text-3xl font-light text-gray-700 mb-2">
-                        두둔
-                    </h3>
+                    <h4 className="text-xl md:text-3xl font-light text-gray-700 mb-2">
+                        누가 여행가면 놀고 먹는다고 했나요...?
+                    </h4>
                     <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto"></div>
                 </div>
 
                 {/* Main greeting message */}
-                <div className="space-y-2 text-gray-600 font-light leading-relaxed">
-                    <div className="animate-on-scroll opacity-0">
-                        <p className="text-base md:text-lg mb-3">
-                            각자 서로 다른 길을
-                        </p>
-                        <p className="text-base md:text-lg mb-3">
-                            걸어온 저희가 이제 부부의 연으로
+                <div className="space-y-6 text-gray-600 font-light leading-relaxed">
+                    <div className="animate-on-scroll opacity-0 space-y-4">
+                        <p className="text-base md:text-lg">
+                            물론 놀고 먹었지만, 그 외에
                         </p>
                         <p className="text-base md:text-lg">
-                            한 길을 걸어가고자 합니다.
+                            짐풀고 짐싸고 걷고 기다리고 또 기다리고
+                        </p>
+                        <p className="text-base md:text-lg">
+                            검색하고 계획하고 확인하고 물어보고
+                        </p>
+                        <p className="text-base md:text-lg">
+                            사기 당하고 앞뒤 살피고 옆도 살피고
+                        </p>
+                        <p className="text-base md:text-lg">
+                            오늘은 뭐할지, 내일은 또 뭐할지, 이 다음엔 어디
+                            갈지,
+                        </p>
+                        <p className="text-base md:text-lg">
+                            오늘 저녁은 뭘 해먹을지... 할 게 많았습니다.
                         </p>
                     </div>
 
                     {/* Divider */}
-                    <div className="animate-on-scroll opacity-0 py-4">
+                    <div className="animate-on-scroll opacity-0">
                         <span className="text-2xl text-gray-300">·</span>
                     </div>
 
-                    <div className="animate-on-scroll opacity-0">
-                        <p className="text-base md:text-lg mb-3">
-                            항상 서로를 생각하며,
+                    <div className="animate-on-scroll opacity-0 space-y-4">
+                        <p className="text-base md:text-lg">
+                            재밌고 지루하고 설레고 화나고 신나고
                         </p>
                         <p className="text-base md:text-lg">
-                            서로 아껴주고 사랑하며 살겠습니다.
+                            슬프고 반성하고를 반복하는 동안
+                        </p>
+                        <p className="text-base md:text-lg">
+                            어느새 242일이 지났습니다.
                         </p>
                     </div>
 
                     {/* Divider */}
-                    <div className="animate-on-scroll opacity-0 py-4">
+                    <div className="animate-on-scroll opacity-0">
                         <span className="text-2xl text-gray-300">·</span>
                     </div>
 
-                    <div className="animate-on-scroll opacity-0">
+                    <div className="animate-on-scroll opacity-0 space-y-4">
                         <p className="text-base md:text-lg mb-3">
-                            부디 참석해 주시어 저희의 약속을
+                            &quot;여행 다녀온 얘기 좀 해봐&quot;란
                         </p>
-                        <p className="text-base md:text-lg">
-                            따뜻한 격려로 축복해 주시기 바랍니다.
+                        <p className="text-base md:text-lg mb-3">
+                            질문에 재밌게 답을 잘 못했습니다.
+                        </p>
+                        <p className="text-base md:text-lg mb-3">
+                            대신 여행 동안 매일 사진일기를 적었는데요.
+                        </p>
+                        <p className="text-base md:text-lg mb-3">
+                            그 일기의 일부를 공개합니다!
                         </p>
                     </div>
                 </div>
