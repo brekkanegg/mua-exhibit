@@ -84,8 +84,8 @@ export default function RSVP() {
             <div className="max-w-lg mx-auto px-6 text-center">
                 {/* Title Section */}
                 <div className="animate-on-scroll opacity-0 mb-8 text-center">
-                    <h3 className="text-2xl md:text-3xl font-light text-gray-700 mb-4">
-                        참석 여부를 전달해주세요
+                    <h3 className="text-xl md:text-3xl font-light text-gray-700 mb-4">
+                        &quot;나 갈게요&quot; 한마디가 큰 힘이 됩니다
                     </h3>
                     <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto"></div>
                 </div>
@@ -93,19 +93,16 @@ export default function RSVP() {
                 {/* Message */}
                 <div className="animate-on-scroll opacity-0 space-y-4 mb-12 text-gray-600">
                     <p className="text-base md:text-lg leading-relaxed">
-                        결혼식 참석 전 참석여부를 응답해주시면
+                        좌석과 간단한 도시락을 준비하려면
                     </p>
                     <p className="text-base md:text-lg leading-relaxed">
-                        결혼식 준비에 있어 큰 도움이 됩니다.
+                        미리 인원을 알아야 해요.
                     </p>
                     <p className="text-base md:text-lg leading-relaxed">
-                        한 분 한 분 더욱 귀하게 모실 수 있도록
+                        아래에서 참석 여부를 알려주시면
                     </p>
                     <p className="text-base md:text-lg leading-relaxed">
-                        아래 버튼을 클릭하여 참석여부를
-                    </p>
-                    <p className="text-base md:text-lg leading-relaxed">
-                        전달 부탁드립니다.
+                        더 편안하게 모실 수 있습니다.
                     </p>
                 </div>
 
