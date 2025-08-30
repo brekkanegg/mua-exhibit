@@ -2,7 +2,7 @@ import type { RSVP } from "@/lib/supabase";
 import { supabase } from "@/lib/supabase";
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = 'edge';
+export const runtime = "edge";
 
 export async function POST(request: NextRequest) {
     try {
@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
 
         // Validate required fields
         if (
-            !body.side ||
+            !body.name ||
             !body.attendance ||
             body.meal === undefined ||
             !body.party_size
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
             .from("rsvps")
             .insert([
                 {
-                    side: body.side,
+                    name: body.name,
                     attendance: body.attendance,
                     meal: body.meal,
                     party_size: body.party_size,

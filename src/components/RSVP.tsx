@@ -3,16 +3,16 @@
 import type { RSVP } from "@/lib/supabase";
 import * as Label from "@radix-ui/react-label";
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import { Calendar, Check, Send } from "lucide-react";
+import { AlertCircle, Calendar, Check, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function RSVP() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
 
     const [formData, setFormData] = useState<Partial<RSVP>>({
-        side: "신랑측", // Default value, not displayed to user
         attendance: "참석",
         meal: true,
         party_size: 1,
@@ -59,7 +59,6 @@ export default function RSVP() {
                     setSuccess(false);
                     // Reset form
                     setFormData({
-                        side: "신랑측",
                         attendance: "참석",
                         meal: true,
                         party_size: 1,
@@ -69,11 +68,15 @@ export default function RSVP() {
                     });
                 }, 3000);
             } else {
-                alert("전송 중 오류가 발생했습니다. 다시 시도해주세요.");
+                const errorData = await response.json();
+                console.error("Server returned error:", errorData);
+                setError(true);
+                setTimeout(() => setError(false), 5000);
             }
-        } catch (error) {
-            console.error("Error submitting RSVP:", error);
-            alert("전송 중 오류가 발생했습니다. 다시 시도해주세요.");
+        } catch (err) {
+            console.error("Error submitting RSVP:", err);
+            setError(true);
+            setTimeout(() => setError(false), 5000);
         } finally {
             setLoading(false);
         }
@@ -111,7 +114,7 @@ export default function RSVP() {
                     <div className="inline-block border-t border-b border-dashed border-gray-300 py-6 px-8">
                         <div className="flex items-center justify-center gap-2 mb-3">
                             <Calendar className="w-5 h-5 text-gray-500" />
-                            <span className="text-gray-700 font-medium">
+                            <span className="text-gray-700 font-bold">
                                 10월 12일 일요일 오후 1시
                             </span>
                         </div>
@@ -128,27 +131,89 @@ export default function RSVP() {
                                 <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                 <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                            <span className="text-gray-700 font-medium">
+                            <span className="text-gray-700 font-bold">
                                 양재시민의숲 야외예식장
                             </span>
                         </div>
                     </div>
                 </div>
 
-                {/* Success Message */}
+                {/* Success Toast */}
                 {success && (
-                    <div className="animate-fade-in-up bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-                        <div className="flex items-center justify-center gap-3">
-                            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                                <Check className="w-5 h-5 text-green-600" />
+                    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:bottom-auto md:top-4 md:right-4 z-50 animate-slide-in-right">
+                        <div className="bg-white border border-green-200 rounded-lg shadow-lg p-4 min-w-[280px] max-w-sm mx-auto md:mx-0">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <Check className="w-5 h-5 text-green-600" />
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="font-semibold text-green-800 text-sm">
+                                        감사합니다!
+                                    </h4>
+                                    <p className="text-green-600 text-xs mt-0.5">
+                                        10/12 에 뵙겠습니다.
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => setSuccess(false)}
+                                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                                    aria-label="Close"
+                                >
+                                    <svg
+                                        className="w-4 h-4"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
                             </div>
-                            <div>
-                                <h4 className="font-medium text-green-800">
-                                    감사합니다!
-                                </h4>
-                                <p className="text-green-600 text-sm">
-                                    10/12 에 뵙겠습니다.
-                                </p>
+                        </div>
+                    </div>
+                )}
+
+                {/* Error Toast */}
+                {error && (
+                    <div
+                        className={`fixed bottom-4 left-4 right-4 md:left-auto md:bottom-auto md:right-4 z-50 animate-slide-in-right ${
+                            success ? "md:top-24" : "md:top-4"
+                        }`}
+                    >
+                        <div className="bg-white border border-red-200 rounded-lg shadow-lg p-4 min-w-[280px] max-w-sm mx-auto md:mx-0">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <AlertCircle className="w-5 h-5 text-red-600" />
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="font-semibold text-red-800 text-sm">
+                                        오류 발생
+                                    </h4>
+                                    <p className="text-red-600 text-xs mt-0.5">
+                                        전송 중 오류가 발생했습니다. 다시
+                                        시도해주세요.
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => setError(false)}
+                                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                                    aria-label="Close"
+                                >
+                                    <svg
+                                        className="w-4 h-4"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -407,8 +472,40 @@ export default function RSVP() {
                     }
                 }
 
+                @keyframes slide-in-right {
+                    from {
+                        opacity: 0;
+                        transform: translateX(100%);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+
+                @keyframes slide-in-up {
+                    from {
+                        opacity: 0;
+                        transform: translateY(100%);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
                 :global(.animate-fade-in-up) {
                     animation: fade-in-up 0.8s ease-out forwards;
+                }
+
+                :global(.animate-slide-in-right) {
+                    animation: slide-in-up 0.3s ease-out forwards;
+                }
+
+                @media (min-width: 768px) {
+                    :global(.animate-slide-in-right) {
+                        animation: slide-in-right 0.3s ease-out forwards;
+                    }
                 }
 
                 :global(.animate-on-scroll) {

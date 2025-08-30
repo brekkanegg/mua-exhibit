@@ -7,8 +7,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export type RSVP = {
     id?: string;
-    name?: string;
-    side?: "신랑측" | "신부측";
+    name: string;
     attendance: "참석" | "불참";
     meal: boolean;
     party_size: number;
