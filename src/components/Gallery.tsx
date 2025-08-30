@@ -208,6 +208,25 @@ const Gallery = () => {
             )}
 
             <style jsx>{`
+                @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&family=Pretendard:wght@100;200;300;400&display=swap");
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p,
+                span,
+                div,
+                button {
+                    font-family: "Pretendard", "Noto Serif KR",
+                        "Apple SD Gothic Neo", -apple-system, BlinkMacSystemFont,
+                        "Segoe UI", sans-serif;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+
                 @keyframes fade-in {
                     from {
                         opacity: 0;

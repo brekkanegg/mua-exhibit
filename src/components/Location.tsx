@@ -370,20 +370,40 @@ const Location = () => {
                     <div className="text-sm text-gray-600">
                         <p className="font-medium mb-2">[내비게이션]</p>
                         <p>
-                            &ldquo;양재시민의숲&rdquo;, &ldquo;매헌시민의숲&rdquo; 또는 &ldquo;서울 서초구
+                            &ldquo;양재시민의숲&rdquo;,
+                            &ldquo;매헌시민의숲&rdquo; 또는 &ldquo;서울 서초구
                             매헌로 99&rdquo; 검색
                         </p>
                         <p className="font-medium text-gray-500 mt-3 bg-red-100">
                             * 양재시민의숲 동측주차장 혹은 양재시민의숲 매헌역
-                            공영주차장 이용 가능 (유료)
+                            공영주차장 이용 가능합니다. (유료)
                             <br />* 주말에는 주차가 혼잡하니 대중교통 이용을
-                            부탁드립니다
+                            부탁드립니다.
                         </p>
                     </div>
                 </div>
             </div>
 
             <style jsx>{`
+                @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&family=Pretendard:wght@100;200;300;400&display=swap");
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                p,
+                span,
+                div,
+                button {
+                    font-family: "Pretendard", "Noto Serif KR",
+                        "Apple SD Gothic Neo", -apple-system, BlinkMacSystemFont,
+                        "Segoe UI", sans-serif;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+
                 @keyframes fade-in-up {
                     from {
                         opacity: 0;
