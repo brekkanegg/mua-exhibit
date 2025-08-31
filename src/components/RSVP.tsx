@@ -269,7 +269,7 @@ export default function RSVP() {
                                 />
                                 <Label.Root
                                     htmlFor="attend"
-                                    className="block text-center px-6 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
+                                    className="block text-center px-2 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
                                 >
                                     참석
                                 </Label.Root>
@@ -282,7 +282,7 @@ export default function RSVP() {
                                 />
                                 <Label.Root
                                     htmlFor="absent"
-                                    className="block text-center px-6 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
+                                    className="block text-center px-2 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
                                 >
                                     불참
                                 </Label.Root>
@@ -313,7 +313,7 @@ export default function RSVP() {
                                         />
                                         <Label.Root
                                             htmlFor="meal-yes"
-                                            className="block text-center px-6 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
+                                            className="block text-center px-2 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
                                         >
                                             식사 예정
                                         </Label.Root>
@@ -326,7 +326,7 @@ export default function RSVP() {
                                         />
                                         <Label.Root
                                             htmlFor="meal-no"
-                                            className="block text-center px-6 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
+                                            className="block text-center px-2 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 peer-data-[state=checked]:bg-gray-800 peer-data-[state=checked]:text-white peer-data-[state=checked]:border-gray-800 transition-all duration-200 font-medium"
                                         >
                                             식사 안함
                                         </Label.Root>

@@ -91,11 +91,13 @@ export default function Greeting() {
                             사기 당하고 앞뒤 살피고 옆도 살피고
                         </p>
                         <p className="text-base md:text-lg">
-                            오늘은 뭐할지, 내일은 또 뭐할지, 이 다음엔 어디
-                            갈지,
+                            오늘은 뭐할지, 내일은 또 뭐할지,
                         </p>
                         <p className="text-base md:text-lg">
-                            오늘 저녁은 뭘 해먹을지... 할 게 많았습니다.
+                            이 다음엔 어디 갈지, 오늘 저녁은 뭘 해먹을지...
+                        </p>
+                        <p className="text-base md:text-lg">
+                            등 고민할 게 많았습니다.
                         </p>
                     </div>
 
