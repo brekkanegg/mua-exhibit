@@ -99,7 +99,7 @@ const Poster = ({
                                         "2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)",
                                 }}
                             >
-                                242 Days to Somewhere
+                                242 Days of Somewhere
                             </p>
                         </div>
                     </div>
