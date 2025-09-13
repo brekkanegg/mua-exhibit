@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     // Open Graph metadata for social media sharing
     openGraph: {
         title: "242 Days of Somewhere",
-        description: "2025년 10월 12일 일요일 오후 12시, 사진전에 초대합니다.",
+        description: "2025년 10월 12일 일요일 오후 1시, 사진전에 초대합니다.",
         url: "https://mua-exhibit.pages.dev",
         siteName: "242 Days of Somewhere",
         images: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "242 Days of Somewhere",
-        description: "2025년 10월 12일 일요일 낮 12시, 양재시민의숲 야외예식장",
+        description: "2025년 10월 12일 일요일 오후 1시, 양재시민의숲 야외예식장",
         images: [`${R2_BUCKET_URL}/poster_small.jpg`],
     },
 
